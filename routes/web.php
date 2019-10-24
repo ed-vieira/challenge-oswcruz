@@ -12,9 +12,20 @@
 */
 
 
+
+Route::get('/importer', 'ImportController@index')->name('import');
+
+
+
 Route::view('/', 'welcome');
 
 Auth::routes();
 
 
+
+
 Route::view('/{path?}', 'home');
+
+
+
+
