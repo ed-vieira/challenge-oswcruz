@@ -4,10 +4,13 @@
  * building robust, powerful web applications using React + Laravel.
  */
 
+ 
+window._ = require('lodash');
 
 window.frontPage = require('axios');
 
 window.frontPage.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 

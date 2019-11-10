@@ -1,5 +1,5 @@
 // css
-const style = {
+export default {
     paragraph: {
         textTransform: "lowercase"
     },
@@ -42,4 +42,4 @@ const style = {
     }
 }
 
-export default style
+

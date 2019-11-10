@@ -15,23 +15,15 @@ class ImportController extends Controller
 
 
      public function index(){
-
-       //  $this->import();
-
+         $this->import();
         return 'All imported';
      }
-
-
-
-
 
 
     public function import()
     {
         try {
-
-            $data =  Excel::import(new ProdutosImport, public_path('\\excel\\lista_medicamentos.xlsx'));
-
+           $data = Excel::import(new ProdutosImport, public_path('\\excel\\lista_medicamentos.xlsx'));
         } catch (FileNotFoundException $e) {
 
             $file = 'error.log';

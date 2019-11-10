@@ -6,7 +6,7 @@ import CartComponent from './CartComponent'
 import OrdersComponent from './OrdersComponent'
 
 
-class HomeComponent extends Component {
+export default class HomeComponent extends Component {
 
     constructor() {
         super()
@@ -63,6 +63,7 @@ class HomeComponent extends Component {
         const action = this.refresh
         return (
             <div className='container-fluid'>
+                 <br /><hr /><br />
                 <div className='row'>
                    <CartComponent  action={action} produtos={produtos} carrinho={carrinho} />
                 </div>
@@ -75,4 +76,3 @@ class HomeComponent extends Component {
     }
 }
 
-export default HomeComponent

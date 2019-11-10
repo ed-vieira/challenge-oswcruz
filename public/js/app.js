@@ -93555,7 +93555,6 @@ window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js")
 window.user = {};
 window.carrinho = {};
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.axios.defaults.headers.common['Authorization'] = "Bearer ".concat(sessionStorage.getItem('api_key'));
 window.user.id = sessionStorage.getItem('user_id');
 window.carrinho.id = sessionStorage.getItem('carrinho_id');
 var token = document.head.querySelector('meta[name="csrf-token"]');
@@ -93669,6 +93668,7 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CartComponent; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _formatter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../formatter */ "./resources/js/formatter.js");
@@ -93788,7 +93788,7 @@ function (_Component) {
   return CartComponent;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (CartComponent);
+
 
 /***/ }),
 
@@ -93945,11 +93945,11 @@ __webpack_require__.r(__webpack_exports__);
 nome do medicamento, princípio ativo ou nome do laboratório
 */
 
-var Header = function Header() {
+/* harmony default export */ __webpack_exports__["default"] = (function () {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
     className: "navbar navbar-expand-md navbar-light bg-light navbar-laravel"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "col-md-8 offset-md-2"
+    className: "col-md-12"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
     className: "navbar-brand",
     to: "/home"
@@ -93957,9 +93957,7 @@ var Header = function Header() {
     className: "navbar-brand",
     to: "/produtos"
   }, "Produtos")))));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (Header);
+});
 
 /***/ }),
 
@@ -93972,6 +93970,7 @@ var Header = function Header() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return HomeComponent; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
@@ -94078,7 +94077,7 @@ function (_Component) {
       var action = this.refresh;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container-fluid"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CartComponent__WEBPACK_IMPORTED_MODULE_4__["default"], {
         action: action,
@@ -94095,7 +94094,7 @@ function (_Component) {
   return HomeComponent;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (HomeComponent);
+
 
 /***/ }),
 
@@ -94285,7 +94284,8 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Product).call(this));
     _this.state = {
       produtosQt: 1,
-      message: ''
+      message: '',
+      productSelected: ''
     };
     _this.addToCart = _this.addToCart.bind(_assertThisInitialized(_this));
     return _this;
@@ -94294,6 +94294,8 @@ function (_Component) {
   _createClass(Product, [{
     key: "addToCart",
     value: function addToCart() {
+      var _this2 = this;
+
       var produto = this.props.produto;
       var data = {
         produto_id: produto.id,
@@ -94301,16 +94303,21 @@ function (_Component) {
         unid: this.state.produtosQt,
         valor_unitario: produto.valor_unitario
       };
-      axios.post('/api/carrinhos', data).then(function (res) {
-        alert('produto adicionado ao carrinho');
+      console.log(JSON.stringify(data, null, 4));
+      window.axios.post('/api/carrinhos', data).then(function (res) {
+        var productSelected = 'produto adicionado ao carrinho';
+
+        _this2.setState({
+          productSelected: productSelected
+        });
       })["catch"](function (err) {
-        console.log(err);
+        console.log(JSON.stringify(err, null, 4));
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var produtosQt = this.state.produtosQt;
       var produto = this.props.produto;
@@ -94341,13 +94348,7 @@ function (_Component) {
         src: "/images/".concat(produto.avatar)
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
         style: _style__WEBPACK_IMPORTED_MODULE_2__["default"].paragraph
-      }, "apresenta\xE7\xE3o: ", produto.apresentacao), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: _style__WEBPACK_IMPORTED_MODULE_2__["default"].paragraph
-      }, "laboratorio: ", produto.laboratorio), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: _style__WEBPACK_IMPORTED_MODULE_2__["default"].paragraph
-      }, "principio ativo: ", produto.principio_ativo), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-        style: _style__WEBPACK_IMPORTED_MODULE_2__["default"].paragraph
-      }, "estoque inicial: ", produto.estoque_inicial), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "valor unit\xE1rio: ", Object(_formatter__WEBPACK_IMPORTED_MODULE_1__["formatCurrency"])(produto.valor_unitario))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "apresenta\xE7\xE3o:"), " ", produto.apresentacao, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "laboratorio:"), " ", produto.laboratorio, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "principio ativo:"), " ", produto.principio_ativo, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "estoque inicial:"), " ", produto.estoque_inicial, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, "valor unit\xE1rio:"), " ", Object(_formatter__WEBPACK_IMPORTED_MODULE_1__["formatCurrency"])(produto.valor_unitario))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "card-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row",
@@ -94361,20 +94362,29 @@ function (_Component) {
       }, this.state.produtosQt > 0 ? "valor: ".concat(Object(_formatter__WEBPACK_IMPORTED_MODULE_1__["formatCurrency"])(produtosQt * produto.valor_unitario)) : "")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-8"
+        className: "col-md-7"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         onChange: function onChange(e) {
-          return _this2.setState({
+          return _this3.setState({
             produtosQt: e.target.value
           });
         },
         className: "form-control form-control-sm"
       }, counter(produto.estoque_inicial))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-md-4"
+        className: "col-md-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.addToCart,
         className: "btn btn-outline-primary btn-sm"
-      }, "adicionar"))))));
+      }, "adicionar"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-12",
+        style: {
+          padding: '5%'
+        }
+      }, this.state.productSelected !== '' ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+        className: "btn btn-outline-primary btn-sm"
+      }, this.state.productSelected) : '')))));
     }
   }]);
 
@@ -94750,7 +94760,7 @@ function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 // css
-var style = {
+/* harmony default export */ __webpack_exports__["default"] = ({
   paragraph: {
     textTransform: "lowercase"
   },
@@ -94789,8 +94799,7 @@ var style = {
   formStyle: {
     padding: 30
   }
-};
-/* harmony default export */ __webpack_exports__["default"] = (style);
+});
 
 /***/ }),
 
@@ -94835,8 +94844,8 @@ var formatCurrency = function formatCurrency(value) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! Z:\LAB\provas\empresas\oswaldo-cruz\v1\challenge\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! Z:\LAB\provas\empresas\oswaldo-cruz\v1\challenge\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! Z:\LAB\PROVAS\empresas\oswcruz\v1\challenge\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! Z:\LAB\PROVAS\empresas\oswcruz\v1\challenge\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ }),

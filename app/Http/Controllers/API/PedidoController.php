@@ -18,6 +18,7 @@ class PedidoController extends Controller
     public function __construct(IPedido $repository)
     {
         $this->repository = $repository;
+        $this->middleware('auth:api');
     }
 
 
@@ -31,7 +32,7 @@ class PedidoController extends Controller
     public function index(Request $request)
     {
         //
-        return $this->repository->listAll($request->user_id);
+        return $this->repository->listAll($request->user()->id);
     }
 
 
@@ -58,7 +59,7 @@ class PedidoController extends Controller
     public function show(Pedido $pedido)
     {
         //
-       return response()->json([ 'data' => $this->repository->orderDetails($pedido)]);
+       return response()->json([ 'data' => $this->repository->orderDetails($pedido)], 200);
     }
 
 

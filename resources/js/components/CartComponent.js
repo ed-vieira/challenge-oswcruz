@@ -5,7 +5,7 @@ import { request } from 'https';
 import CartProductComponent from './CartProductComponent'
 
 
-class CartComponent extends Component {
+export default class CartComponent extends Component {
 
 
     constructor() {
@@ -26,7 +26,7 @@ class CartComponent extends Component {
               const url = window.URL.createObjectURL(new Blob([res.data]));
               const link = document.createElement('a');
               link.href = url;
-              link.setAttribute('download', 'pedido.pdf'); 
+              link.setAttribute('download', 'pedido.pdf');
               document.body.appendChild(link);
               link.click();
           })
@@ -97,4 +97,4 @@ class CartComponent extends Component {
     }
 }
 
-export default CartComponent
+

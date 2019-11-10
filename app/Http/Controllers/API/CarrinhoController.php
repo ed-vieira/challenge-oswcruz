@@ -6,7 +6,7 @@ use App\Models\Pedidos\Carrinho;
 use App\Models\Pedidos\ICarrinho;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+
 
 class CarrinhoController extends Controller
 {
@@ -19,6 +19,7 @@ class CarrinhoController extends Controller
     public function __construct(ICarrinho $repository)
     {
         $this->repository = $repository;
+        $this->middleware('auth:api');
     }
 
 
@@ -30,7 +31,7 @@ class CarrinhoController extends Controller
      */
     public function index(Request $request)
     {
-       $data= $this->repository->listAll($request->user_id);
+       $data= $this->repository->listAll($request->user()->id);
        return response()->json(['data' => $data]);
     }
 
@@ -46,7 +47,7 @@ class CarrinhoController extends Controller
     {
         //
         $this->repository->save($request);
-        return  response()->json(['data' => ['message' => 'success']]);
+        return  response()->json(['data' => ['message' => 'success']], 201);
     }
 
     /**

@@ -88,13 +88,12 @@ class ProductsComponent extends Component {
     }
 
     listKeyWodrs(produtos) {
-        let list = [];
         //carrega array com as palavras a chave para a pesquisa
-        produtos.map((el, index) => {
-            list.push(el.nome)
-            list.push(el.laboratorio)
-            list.push(el.principio_ativo)
-        })
+        let list = produtos.map( el  => ({
+            nome: el.nome,
+            laboratorio: el.laboratorio,
+            principio_ativo: el.principio_ativo
+        }))
         //remove palavras duplicadas e ordena a array
         return list.filter((item, index) => list.indexOf(item) === index).sort()
     }
@@ -114,7 +113,7 @@ class ProductsComponent extends Component {
 
 
     SearchProdutos(url) {
-        axios.get(url).then(res => {
+        frontPage.get(url).then(res => {
                 this.setState({ produtos: res.data.data })
         }).catch(err => {
             console.log(err)

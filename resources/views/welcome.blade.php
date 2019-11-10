@@ -1,34 +1,17 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/home.js') }}" defer></script>
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-
-
-</head>
+@include('layouts.header')
 
 <body>
     <div class="flex-center position-ref full-height">
 
         @include('layouts.home-nav')
 
-        <div class="content">
-            <div id='home'> </div>
-        </div>
+        <main class="content">
+            <div id='app'> </div>
+        </main>
+
     </div>
 </body>
 
