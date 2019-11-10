@@ -25,7 +25,7 @@ class ProdutoSearchController  extends ProdutoController
 
     /**
      * Display a listing of the resource.
-     * 
+     *
      * @return \Illuminate\Http\Response
      */
     public function listOrderBy($orderBy, $order = 'asc')
@@ -33,8 +33,6 @@ class ProdutoSearchController  extends ProdutoController
         $data = $this->repository->listAll($orderBy, $order);
         return new ProdutosCollection($data);
     }
-
-
 
 
 
