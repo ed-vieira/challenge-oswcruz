@@ -94473,6 +94473,7 @@ function (_Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ProductsComponent; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_bootstrap_typeahead__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-bootstrap-typeahead */ "./node_modules/react-bootstrap-typeahead/lib/index.js");
@@ -94527,6 +94528,7 @@ function (_Component) {
     _this.orderSearch = _this.orderSearch.bind(_assertThisInitialized(_this));
     _this.allOrderAscPreco = _this.allOrderAscPreco.bind(_assertThisInitialized(_this));
     _this.allOrderDescPreco = _this.allOrderDescPreco.bind(_assertThisInitialized(_this));
+    _this.forceUpdateKey = _this.forceUpdateKey.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -94537,6 +94539,16 @@ function (_Component) {
         searchParam: ''
       });
       this.listAll();
+    }
+  }, {
+    key: "forceUpdateKey",
+    value: function forceUpdateKey(event) {
+      if (event.key === 'Enter') {
+        this.setState({
+          searchParam: ''
+        });
+        this.listAll();
+      }
     }
   }, {
     key: "componentDidMount",
@@ -94611,7 +94623,7 @@ function (_Component) {
     value: function listKeyWodrs(produtos) {
       var list = []; //carrega array com as palavras a chave para a pesquisa
 
-      produtos.map(function (el, index) {
+      produtos.forEach(function (el) {
         list.push(el.nome);
         list.push(el.laboratorio);
         list.push(el.principio_ativo);
@@ -94686,13 +94698,9 @@ function (_Component) {
 
           _this4.search(selected);
         },
+        onKeyDown: this.forceUpdateKey,
         options: keyWords
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-primary",
-        onClick: this.forceUpdateHandler
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
-        className: "fas fa-sync"
-      }), " Recarregar")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-md-4 offset-md-4"
@@ -94739,14 +94747,25 @@ function (_Component) {
         className: "fa fa-chevron-up"
       })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Products__WEBPACK_IMPORTED_MODULE_2__["default"], {
         produtos: produtos
-      }));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "container py-4"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-md-4 offset-md-5"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "btn btn-primary",
+        onClick: this.forceUpdateHandler
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("i", {
+        className: "fas fa-sync"
+      }), " Recarregar")))));
     }
   }]);
 
   return ProductsComponent;
 }(react__WEBPACK_IMPORTED_MODULE_0__["Component"]);
 
-/* harmony default export */ __webpack_exports__["default"] = (ProductsComponent);
+
 
 /***/ }),
 

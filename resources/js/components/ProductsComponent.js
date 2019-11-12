@@ -3,7 +3,7 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 import Products from './Products'
 import style from './style'
 
-class ProductsComponent extends Component {
+export default class ProductsComponent extends Component {
     constructor() {
         super()
         this.state = {
@@ -20,6 +20,7 @@ class ProductsComponent extends Component {
         this.orderSearch = this.orderSearch.bind(this)
         this.allOrderAscPreco = this.allOrderAscPreco.bind(this)
         this.allOrderDescPreco = this.allOrderDescPreco.bind(this)
+        this.forceUpdateKey = this.forceUpdateKey.bind(this)
     }
 
 
@@ -28,6 +29,15 @@ class ProductsComponent extends Component {
         this.setState({ searchParam: '' })
         this.listAll();
     };
+
+
+    forceUpdateKey(event) {
+        if(event.key === 'Enter'){
+            this.setState({ searchParam: '' })
+            this.listAll();
+        }
+    };
+
 
 
     componentDidMount() {
@@ -89,7 +99,7 @@ class ProductsComponent extends Component {
     listKeyWodrs(produtos) {
         let list = [];
         //carrega array com as palavras a chave para a pesquisa
-        produtos.map((el, index) => {
+        produtos.forEach(el => {
             list.push(el.nome)
             list.push(el.laboratorio)
             list.push(el.principio_ativo)
@@ -135,16 +145,16 @@ class ProductsComponent extends Component {
                     <div className='col-md-8 offset-md-2'>
 
                         <div className="input-group input-group-lg">
-                            <Typeahead id="typeahead" labelKey="nome" placeholder="Pesquisar por ' nome ' ' laboratório ' ou ' princípio ativo ' "
+                            <Typeahead id="typeahead" labelKey="nome" 
+                                placeholder="Pesquisar por ' nome ' ' laboratório ' ou ' princípio ativo ' "
                                 clearButton
                                 onChange={(selected) => {
-                                    this.setState({ searchParam: selected });
-                                    this.search(selected)
-                                } }
-                               
+                                        this.setState({ searchParam: selected });
+                                        this.search(selected);
+                                }}
+                                onKeyDown={this.forceUpdateKey}
                                 options={keyWords} />
 
-                               <button className="btn btn-primary" onClick={this.forceUpdateHandler}><i className='fas fa-sync'></i> Recarregar</button>
                         </div>
 
                     </div>
@@ -177,13 +187,16 @@ class ProductsComponent extends Component {
 
                 <Products produtos={produtos} />
 
+                <div className='container py-4'>
+                    <div className='row'>
+                      <div className='col-md-4 offset-md-5'>
+                         <button className="btn btn-primary" onClick={this.forceUpdateHandler}><i className='fas fa-sync'></i> Recarregar</button>
+                      </div>
+                    </div>
+                </div>
+
+
             </div>
         )
     }
 }
-
-
-
-
-
-export default ProductsComponent
